@@ -83,6 +83,10 @@ contract AssetAuction is AssetMinter {
     // to start auctions, potentially by helping them find worthy assets.
     uint128 public helperFraction = 500; // 50%
 
+    // Count number of times params have changed. Can be used to detect
+    // that they've been updated
+    uint64 public paramChanges = 0;
+
     function AssetAuction(address _assetContract, address _tokenContract, uint128 _minBid,
             uint128 _initialStartPrice, uint64 _auctionDuration, uint128 _buyNowFraction,
             uint128 _startPriceBidMult, uint128 _maxReturnMult, uint128 _returnFraction,
@@ -359,6 +363,8 @@ contract AssetAuction is AssetMinter {
             uint128 _helperFraction) public
     {
         require(msg.sender == owner);
+
+        paramChanges += 1;
 
         minBid = _minBid;
         auctionDuration = _auctionDuration;
