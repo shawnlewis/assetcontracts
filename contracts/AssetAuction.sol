@@ -351,4 +351,24 @@ contract AssetAuction is AssetMinter {
         }
         return true;
     }
+
+    function updateParams(uint128 _minBid,
+            uint64 _auctionDuration, uint128 _buyNowFraction,
+            uint128 _startPriceBidMult, uint128 _maxReturnMult, uint128 _returnFraction,
+            uint128 _curveFraction, uint128 _outbidFraction, uint128 _feeFraction,
+            uint128 _helperFraction) public
+    {
+        require(msg.sender == owner);
+
+        minBid = _minBid;
+        auctionDuration = _auctionDuration;
+        buyNowFraction = _buyNowFraction;
+        startPriceBidMult = _startPriceBidMult;
+        maxReturnMult = _maxReturnMult;
+        returnFraction = _returnFraction;
+        curveFraction = _curveFraction;
+        outbidFraction = _outbidFraction;
+        feeFraction = _feeFraction;
+        helperFraction = _helperFraction;
+    }
 }
